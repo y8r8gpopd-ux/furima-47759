@@ -58,7 +58,7 @@
  |column|type|options|
  |------|----|-------|
  |post_code|string|null: false|
- |address|text|null: false|
+ |address|string|null: false|
  |house_number|integer|null: false|
  |building|string||
  |tel|string|null: false|
