@@ -59,7 +59,7 @@
  |------|----|-------|
  |post_code|string|null: false|
  |address|string|null: false|
- |house_number|integer|null: false|
+ |house_number|string|null: false|
  |building|string||
  |tel|string|null: false|
  ||ActiveHash||
