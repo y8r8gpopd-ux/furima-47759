@@ -26,7 +26,7 @@
  |name|string|null:false|
  |price|integer|null:false|
  |description|text|null:false|
- |user_id|reference|null: false, foreign_key: true|
+ |user|references|null: false, foreign_key: true|
  ||ActiveHash||
  |category_id|integer|null: false|
  |condition_id|integer|null: false|
@@ -44,8 +44,8 @@
 
  |column|type|options|
  |------|----|-------|
- |user_id|reference|null: false, foreign_key: true|
- |item_id|reference|null: false, foreign_key: true|
+ |user|references|null: false, foreign_key: true|
+ |item|references|null: false, foreign_key: true|
 
  ## purchaseアソシエーション
   - belongs_to :user
