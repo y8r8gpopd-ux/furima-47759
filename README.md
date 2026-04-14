@@ -62,8 +62,9 @@
  |house_number|string|null: false|
  |building|string||
  |tel|string|null: false|
+ |purchase|references|null: false, foreign_key: true|
  ||ActiveHash||
- |prefecture_id|reference|null: false|
+ |prefecture_id|integer|null: false|
 
  ## shipping_addressアソシエーション
  - belongs_to :purchase
