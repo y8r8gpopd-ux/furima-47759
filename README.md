@@ -24,7 +24,6 @@
  |column|type|options|
  |------|----|-------|
  |name|string|null:false|
- |image|ActiveStorage|null:false|
  |price|integer|null:false|
  |description|text|null:false|
  |user_id|reference|null: false, foreign_key: true|
