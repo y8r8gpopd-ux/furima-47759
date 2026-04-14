@@ -15,8 +15,8 @@
  
 
  ## usersアソシエーション
-  has_many :items
-  has_many :purchase
+  - has_many :items
+  - has_many :purchase
 
 
 # itemsテーブル
@@ -36,8 +36,8 @@
  |shipping_time_id|integer|null: false|
 
  ## itemsアソシエーション
-  belongs_to :user
-  has_one :purchase
+  - belongs_to :user
+  - has_one :purchase
 
 
 
@@ -49,9 +49,9 @@
  |item_id|reference|null: false, foreign_key: true|
 
  ## purchaseアソシエーション
-  belongs_to :user
-  belongs_to :items
-  has_one :shipping_address
+  - belongs_to :user
+  - belongs_to :items
+  - has_one :shipping_address
 
 
 # shipping_addressテーブル
@@ -67,4 +67,4 @@
  |prefecture_id|reference|null: false|
 
  ## shipping_addressアソシエーション
- belongs_to :purchase
+ - belongs_to :purchase
