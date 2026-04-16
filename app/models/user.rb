@@ -9,4 +9,5 @@ class User < ApplicationRecord
   validates :last_name, :first_name, format: {without: /[a-z\d]/i },  presence: true
   validates :first_name_kana, :last_name_kana, format: {with: /\A[ア-ヵー]+\z/}, presence: true
 
+  has_many :items
 end
