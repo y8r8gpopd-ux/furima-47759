@@ -2,7 +2,11 @@ class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   has_one_attached :image
   belongs_to :user
-  belongs_to :category, :condition, :prefecture, :shipping_fee, :shipping_time_id
+  belongs_to :category
+  belongs_to :condition
+  belongs_to :prefecture
+  belongs_to :shipping_fee
+  belongs_to :shipping_time
 
   validates :name, :description, :image, presence: true
   validates :price, presence: true, numericality: { only_integer: true,
