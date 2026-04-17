@@ -10,10 +10,10 @@ FactoryBot.define do
     shipping_time_id {2}
 
     association :user
-  end
+ 
 
-  after(:build) do |item|
-    item.image.attach(io: File.open ('app/assets/images/google-play.png'), filename: 'test.png')
+    after(:build) do |item|
+      item.image.attach(io: File.open('public/test.jpg'), filename: 'test.jpg')
+    end
   end
-  
 end
