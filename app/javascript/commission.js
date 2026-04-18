@@ -6,8 +6,9 @@ function commission (){
     function calculate(){
     let price = priceForm.value
     price = parseInt(priceForm.value, 10) || 0;
-    document.getElementById("add-tax-price").textContent = `${Math.floor(price * 0.1)}`;
-    document.getElementById("profit").textContent = `${Math.floor(price * 0.9)}`;
+    let salesCommission = Math.floor(price * 0.1);
+    document.getElementById("add-tax-price").textContent = `${salesCommission}`;
+    document.getElementById("profit").textContent = `${price - salesCommission}`;
     }
   
 }
