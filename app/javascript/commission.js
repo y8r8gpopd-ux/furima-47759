@@ -1,5 +1,4 @@
 function commission (){
-  console.log("test");
   const priceForm = document.getElementById("item-price");
   priceForm.addEventListener("input", calculate);
 
