@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :shipping_fee
   belongs_to :shipping_time
+  has_one :purchase
 
   validates :name, :description, :image, presence: true
   validates :price, presence: true, numericality: { only_integer: true,
