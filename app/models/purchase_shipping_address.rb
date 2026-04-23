@@ -10,14 +10,14 @@ class PurchaseShippingAddress
   end
 
   def save
-    purchase = Purchase.create!(user_id: user_id, item_id: item_id)
-    ShippingAddress.create!(post_code: post_code,
-                            prefecture_id: prefecture_id,
-                            address: address,
-                            house_number: house_number,
-                            building: building, 
-                            tel: tel, 
-                            purchase_id: purchase.id)
+    purchase = Purchase.create(user_id: user_id, item_id: item_id)
+    ShippingAddress.create(post_code: post_code,
+                           prefecture_id: prefecture_id,
+                           address: address,
+                           house_number: house_number,
+                           building: building, 
+                           tel: tel, 
+                           purchase_id: purchase.id)
   end
 
 end
