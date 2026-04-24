@@ -38,7 +38,8 @@ class PurchasesController < ApplicationController
                                                         :house_number,
                                                         :building,
                                                         :tel).merge(user_id: current_user.id,
-                                                                    item_id: params[:item_id])
+                                                                    item_id: params[:item_id],
+                                                                    token: params[:token])
   end
 
 end
