@@ -40,3 +40,4 @@ const pay = () => {
 
 }
 document.addEventListener("turbo:load", pay);
+document.addEventListener("turbo:render", pay);
