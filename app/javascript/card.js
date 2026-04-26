@@ -22,7 +22,7 @@ const pay = () => {
   chargeForm.addEventListener("submit", (e) =>{
     payjp.createToken(numberElement).then(function(response){
       if(response.error){
-        console.log(response.error.message)
+        
       }else{
         const token = response.id;
         const renderDom = document.getElementById("charge-form");
