@@ -4,8 +4,8 @@ const pay = () => {
   const chargeForm = document.getElementById("charge-form");
   if (!chargeForm) return;
 
-  // const payjp = Payjp(ENV[PAYJP_PUBLIC_KEY])
-  let payjp = Payjp("pk_test_0e9fecadcef5a9c09b88dda2");
+  const publicKey = gon.public_key
+  const payjp = Payjp(publicKey)
   const elements = payjp.elements();
 
   const numberElement = elements.create("cardNumber");
