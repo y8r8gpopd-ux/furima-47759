@@ -9,7 +9,10 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 set :bundle_path, -> { shared_path.join('bundle') }
 set :rbenv_type, :user
 set :rbenv_ruby, '3.2.0' 
-
+set :rbenv_path, '$HOME/.rbenv'
+set :default_env, {
+  PATH: "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH"
+}
 set :ssh_options, auth_methods: ['publickey'],
                                   keys: ['~/.ssh/my-key-pair.pem'] 
 
