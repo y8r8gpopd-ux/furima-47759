@@ -6,7 +6,7 @@ set :repo_url,  'git@github.com:y8r8gpopd-ux/furima-47759.git'
 set :branch, 'main'
 
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
-
+set :bundle_path, -> { shared_path.join('bundle') }
 set :rbenv_type, :user
 set :rbenv_ruby, '3.2.0' 
 
