@@ -15,6 +15,7 @@
         <span class="indispensable">必須</span>
       </div>
       <div class="click-upload">
+        <div id="previews"></div>
         <p>
           クリックしてファイルをアップロード
         </p>
@@ -127,12 +128,10 @@
       </p>
     </div>
     <%# /注意書き %>
-    <%# 下部ボタン %>
     <div class="sell-btn-contents">
       <%= f.submit "出品する" ,class:"sell-btn" %>
       <%=link_to 'もどる', root_path, class:"back-btn" %>
     </div>
-    <%# /下部ボタン %>
   </div>
   <% end %>
 
