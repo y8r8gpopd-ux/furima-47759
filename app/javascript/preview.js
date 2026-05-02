@@ -2,17 +2,19 @@ const preview = function(){
 
   const sellBtn = document.querySelector(".sell-btn");
   if(!sellBtn) return;
-  console.log("読んでるよ");
 
   const preview = document.getElementById("previews");
   const imageForm = document.getElementById("item-image");
 
 
   imageForm.addEventListener("change", function(e){
+    // プレビュー交換する場合前のを消す記述↓↓
     const alreadyPreview = document.querySelector(".preview-img");
     if(alreadyPreview){
       alreadyPreview.remove();
     }
+    // プレビュー交換する場合前のを消す記述↑↑
+
     const imageFile = e.target.files[0];
     const blob = URL.createObjectURL(imageFile);
 

@@ -51,8 +51,7 @@ class ItemsController < ApplicationController
                                    :shipping_fee_id, 
                                    :prefecture_id,
                                    :shipping_time_id,
-                                   :birthday_on,
-                                   :image).merge(user_id: current_user.id)
+                                   {images:[]}).merge(user_id: current_user.id)
     end
 
     def set_item
