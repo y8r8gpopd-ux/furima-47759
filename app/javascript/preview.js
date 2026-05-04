@@ -1,55 +1,54 @@
 const preview = function(){
-
   const sellBtn = document.querySelector(".sell-btn");
   if(!sellBtn) return;
 
   const previewArea = document.getElementById("previews");
 
-    //プレビュー生成関数 
-  const buildPreview = (dataIndex, blob) => {
+  //プレビュー生成関数 
+  const buildCard = (dataIndex, blob = null) => {
+    // card形式でプレビュー生成
+    const card = document.createElement("div");
+    card.setAttribute("class", "preview-card");
+    card.setAttribute("data-index", dataIndex);
+
+    // プレビューの生成
     const previewImg = document.createElement("img");
     previewImg.setAttribute("class", "preview-img");
-    previewImg.setAttribute("data-index", dataIndex);
-    previewImg.src = blob;
+    if(blob) previewImg.src = blob;
 
     // 削除ボタンも作成
     const deleteBtn = document.createElement("div");
     deleteBtn.setAttribute("class", "img-delete-btn");
-    deleteBtn.setAttribute("data-index", dataIndex);
     deleteBtn.textContent = "削除";
     deleteBtn.addEventListener("click", () => deleteImg(dataIndex));
 
-    previewArea.appendChild(previewImg);
-    previewArea.appendChild(deleteBtn);
-  }
-
-    // 二枚目以降の投稿ボタン生成関数
-  const buildNewForm = () => {
-    const imgFormArea = document.querySelector(".click-upload");
+    // 新規フォームの生成
     const newImgForm = document.createElement("input");
     newImgForm.setAttribute("type", "file");
     newImgForm.setAttribute("name", "item[images][]");
-
-    // 二枚目以降のナンバリング
-    const lastImgIndex = document.querySelector('input[type="file"][name="item[images][]"]:last-child');
-    const nextImgIndex = Number(lastImgIndex.getAttribute("data-index")) + 1;
-    newImgForm.setAttribute("data-index", nextImgIndex);
-
+    newImgForm.setAttribute("data-index", dataIndex);
     newImgForm.addEventListener("change", changeFile);
-    imgFormArea.appendChild(newImgForm);
+
+    // カードにまとめる
+    card.appendChild(previewImg);
+    card.appendChild(deleteBtn);
+    card.appendChild(newImgForm);
+
+    // プレビューに追加する
+    previewArea.appendChild(card);
   }
 
-  // ファイルが空の時フォームを削除する関数
+  // フォームをカードごと削除する関数
   const deleteImg = (dataIndex) => {
-    const deletePreview = document.querySelector(`.preview-img[data-index="${dataIndex}"]`);
-    deletePreview.remove();
+    const card = document.querySelector(`.preview-card[data-index="${dataIndex}"]`);
+    card.remove();
 
-    const deleteImgForm = document.querySelector(`input[type="file"][data-index="${dataIndex}"]`);
-    deleteImgForm.remove();
-
-    const deleteDeleteBtn = document.querySelector(`.img-delete-btn[data-index="${dataIndex}"]`);
-    deleteDeleteBtn.remove();
-  }
+    // 全部カードが消えた場合に追加で作成
+    const inputs = document.querySelectorAll('input[type="file"]');
+    if (inputs.length === 0) {
+    buildCard(0);
+    }
+  };
 
 
     // 投稿ボタンが触れられた時の関数
@@ -65,19 +64,27 @@ const preview = function(){
 
     const blob = URL.createObjectURL(imgFile);
 
-    const alreadyPreview = document.querySelector(`.preview-img[data-index="${dataIndex}"]`);
-    if(alreadyPreview){
-      alreadyPreview.src = blob;
-      return ;
-    };
+    const card = document.querySelector(`.preview-card[data-index="${dataIndex}"]`);
+    const previewImg = card.querySelector(".preview-img");
 
-    buildPreview(dataIndex, blob);
-    buildNewForm();
+    previewImg.src = blob;
+
+    // 次の投稿カードの準備
+    const nextIndex = Number(dataIndex) + 1;
+    const nextCard = document.querySelector(`.preview-card[data-index="${nextIndex}"]`);
+
+    // 次の投稿カードがなければ生成
+    if (!nextCard) {
+    buildCard(nextIndex);
+    }
+  };
+  
+  const card = document.querySelector(".preview-card")
+  if(!card){
+    buildCard(0);
   }
-
-  const imgForm = document.getElementById("item-image");
-  imgForm.addEventListener("change", changeFile);
 };
 
 
-document.addEventListener("turbo:load", preview)
+document.addEventListener("turbo:load", preview);
+document.addEventListener("turbo:render", preview);
