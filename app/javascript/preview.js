@@ -4,8 +4,14 @@ const preview = function(){
 
   const previewArea = document.getElementById("previews");
 
+  // 編集ページ用・保存されている画像の取得処理
+  const imagesData = previewArea.dataset.images;
+  const existingImages = imagesData ? JSON.parse(imagesData) : [];
+  // 重複してる場合の初期化
+  previewArea.innerHTML = "";
+
   //プレビュー生成関数 
-  const buildCard = (dataIndex, blob = null) => {
+  const buildCard = (dataIndex, src = null, imgId = null) => {
     // card形式でプレビュー生成
     const card = document.createElement("div");
     card.setAttribute("class", "preview-card");
@@ -14,13 +20,13 @@ const preview = function(){
     // プレビューの生成
     const previewImg = document.createElement("img");
     previewImg.setAttribute("class", "preview-img");
-    if(blob) previewImg.src = blob;
+    if(src) previewImg.src = src;
 
     // 削除ボタンも作成
     const deleteBtn = document.createElement("div");
     deleteBtn.setAttribute("class", "img-delete-btn");
     deleteBtn.textContent = "削除";
-    deleteBtn.addEventListener("click", () => deleteImg(dataIndex));
+    deleteBtn.addEventListener("click", () => deleteImg(dataIndex, imgId));
 
     // 新規フォームの生成
     const newImgForm = document.createElement("input");
@@ -39,9 +45,18 @@ const preview = function(){
   }
 
   // フォームをカードごと削除する関数
-  const deleteImg = (dataIndex) => {
+  const deleteImg = (dataIndex, imgId) => {
     const card = document.querySelector(`.preview-card[data-index="${dataIndex}"]`);
     card.remove();
+
+    if(imgId){
+      const hidden = document.createElement("input");
+      hidden.type = "hidden";
+      hidden.name = "item[remove_image_ids][]";
+      hidden.value = imgId;
+      const form = document.querySelector(".items-sell-main form");
+      form.appendChild(hidden);
+    }
 
     // 全部カードが消えた場合に追加で作成
     const inputs = document.querySelectorAll('input[type="file"]');
@@ -79,10 +94,19 @@ const preview = function(){
     }
   };
   
-  const card = document.querySelector(".preview-card")
-  if(!card){
+
+   // 編集ページ、すでに画像がある時
+  if (existingImages.length > 0){
+    existingImages.forEach((img, index) => {
+      buildCard(index, img.url, img.id);
+    });
+    buildCard(existingImages.length);
+  } 
+  // 出品ページ、画像がまだないとき
+  else {
     buildCard(0);
   }
+  
 };
 
 

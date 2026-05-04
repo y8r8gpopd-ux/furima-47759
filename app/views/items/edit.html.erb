@@ -15,7 +15,9 @@
         <span class="indispensable">必須</span>
       </div>
       <div class="click-upload">
-        <div id="previews"></div>
+        <%# ↓↓DBの保存されている画像をjson形式に↓↓ %>
+        <div id="previews"data-images='<%= @item.images.map { |image| {id: image.id, url: url_for(image) }}.to_json %>'>
+        </div>
         <p>
           クリックしてファイルをアップロード
         </p>
