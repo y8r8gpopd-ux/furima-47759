@@ -9,12 +9,13 @@ class Item < ApplicationRecord
   belongs_to :shipping_time
   has_one :purchase
 
-  validates :name, :description, :images, presence: true
+  validates :name, :description, presence: true
   validates :price, presence: true, numericality: { only_integer: true,
                                                     greater_than_or_equal_to: 300,
                                                     less_than_or_equal_to: 9999999 }
 
   validates :category_id, :condition_id, :shipping_fee_id, :prefecture_id, :shipping_time_id, presence: true, numericality:{
                                                                                                               other_than: 1 } 
+  validates :images, length: {minimum: 1, maximum: 5}
 
 end

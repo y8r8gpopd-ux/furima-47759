@@ -126,10 +126,11 @@ const preview = function(){
     }
   };
 
+  // 次に使うindexの数値の取得
   const getNextIndex = () => {
-  const cards = document.querySelectorAll(".preview-card");
-  const indices = Array.from(cards).map(card => Number(card.dataset.index));
-  return indices.length ? Math.max(...indices) + 1 : 0;
+    const cards = document.querySelectorAll(".preview-card");
+    const indices = Array.from(cards).map(card => Number(card.dataset.index));
+    return indices.length ? Math.max(...indices) + 1 : 0;
   };
 
    // 編集ページ、すでに画像がある時

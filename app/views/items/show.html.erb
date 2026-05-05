@@ -13,14 +13,12 @@
         <span>Sold Out!!</span>
       </div>
       <% end %>
-<%# 後で位置調整 /////////////////////////////////////////////////////////////%>
       <div class="other-images">
       <% @item.images[1..-1].each do |image| %>
         <div class="other-image">
-          <%= image_tag image %>
+          <%= image_tag image ,class:"other-image-element" %>
         </div>
       <% end %>
-<%# 後で位置調整 /////////////////////////////////////////////////////////////%>
   </div>
       
     </div>
@@ -109,6 +107,9 @@
     </a>
   </div>
   <a href="#" class="another-item"><%= @item.category.name %>をもっと見る</a>
+  <div class="zoom-back">
+    <%= image_tag "" ,class:"zoom-img" %>
+  </div>
 </div>
 
 <%= render "shared/footer" %>
