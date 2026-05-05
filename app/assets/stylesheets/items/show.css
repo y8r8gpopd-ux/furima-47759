@@ -212,10 +212,24 @@
   justify-content: center;
 }
 
+.other-image{
+  position: relative;
+}
+
 .other-image-element{
   height: 200px;
   width: 200px;
   object-fit: cover;
+}
+
+.other-sold-out{
+  position: absolute;
+  top: 80%;
+  width: 100%;
+  text-align: center;
+  background-color: crimson;
+  color: #FFF;
+  transform: skewY(-8deg);
 }
 
 .zoom-back{
@@ -235,3 +249,4 @@
   height: 80%;
   object-fit: contain;
 }
+

@@ -9,19 +9,24 @@
     <div class="item-img-content">
       <%= image_tag @item.images[0] ,class:"item-box-img" %>
       <% if @item.purchase.present? %>
-      <div class="sold-out">
-        <span>Sold Out!!</span>
-      </div>
-      <% end %>
-      <div class="other-images">
-      <% @item.images[1..-1].each do |image| %>
-        <div class="other-image">
-          <%= image_tag image ,class:"other-image-element" %>
+        <div class="sold-out">
+          <span>Sold Out!!</span>
         </div>
       <% end %>
-  </div>
-      
+      <div class="other-images">
+        <% @item.images[1..-1].each do |image| %>
+          <div class="other-image">
+            <%= image_tag image ,class:"other-image-element" %>
+            <% if @item.purchase.present? %>
+              <div class="other-sold-out">sold out</div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    
     </div>
+      
+    
     <div class="item-price-box">
       <span class="item-price">
         ¥ <%= @item.price %>
