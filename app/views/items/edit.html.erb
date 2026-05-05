@@ -5,7 +5,7 @@
   </header>
   <div class="items-sell-main">
     <h2 class="items-sell-title">商品の情報を入力</h2>
-    <%= form_with model: @item, local: true do |f| %>
+    <%= form_with model: @item, html: { multipart: true }, local: true do |f| %>
 
     <%= render 'shared/error_messages', model: f.object %>
 
@@ -13,12 +13,12 @@
       <div class="weight-bold-text">
         商品画像
         <span class="indispensable">必須</span>
+        <br><span class="image-limit">5枚まで投稿可能</span>
       </div>
       <div class="click-upload">
-        <p>
-          クリックしてファイルをアップロード
-        </p>
-        <%= f.file_field :image, id:"item-image" %>
+        <%# ↓↓DBの保存されている画像をjson形式に↓↓ %>
+        <div id="previews"data-images='<%= @item.images.map { |image| {id: image.id, url: url_for(image) }}.to_json %>'>
+        </div>
       </div>
     </div>
     

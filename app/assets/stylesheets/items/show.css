@@ -7,6 +7,7 @@
   flex-direction: column;
   align-items: center;
   padding: 5vh 0;
+  position: relative;
 }
 
 .item-box {
@@ -197,7 +198,7 @@
   color: #3CCACE;
 }
 
-.another-item {
+.another-item{
   display: block;
   margin: 30px 0px 8px;
   color: #3CCACE;
@@ -205,3 +206,47 @@
   font-weight: bold;
   font-size: 23px;
 }
+
+.other-images{
+  display: flex;
+  justify-content: center;
+}
+
+.other-image{
+  position: relative;
+}
+
+.other-image-element{
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+}
+
+.other-sold-out{
+  position: absolute;
+  top: 80%;
+  width: 100%;
+  text-align: center;
+  background-color: crimson;
+  color: #FFF;
+  transform: skewY(-8deg);
+}
+
+.zoom-back{
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0,0,0,0.8);
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  display: none;
+}
+
+.zoom-img{
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+}
+

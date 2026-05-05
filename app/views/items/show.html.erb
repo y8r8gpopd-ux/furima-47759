@@ -7,13 +7,26 @@
       <%= @item.name %>
     </h2>
     <div class="item-img-content">
-      <%= image_tag @item.image ,class:"item-box-img" %>
+      <%= image_tag @item.images[0] ,class:"item-box-img" %>
       <% if @item.purchase.present? %>
-      <div class="sold-out">
-        <span>Sold Out!!</span>
-      </div>
+        <div class="sold-out">
+          <span>Sold Out!!</span>
+        </div>
       <% end %>
+      <div class="other-images">
+        <% @item.images[1..-1].each do |image| %>
+          <div class="other-image">
+            <%= image_tag image ,class:"other-image-element" %>
+            <% if @item.purchase.present? %>
+              <div class="other-sold-out">sold out</div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    
     </div>
+      
+    
     <div class="item-price-box">
       <span class="item-price">
         ¥ <%= @item.price %>
@@ -99,6 +112,9 @@
     </a>
   </div>
   <a href="#" class="another-item"><%= @item.category.name %>をもっと見る</a>
+  <div class="zoom-back">
+    <%= image_tag "" ,class:"zoom-img" %>
+  </div>
 </div>
 
 <%= render "shared/footer" %>
