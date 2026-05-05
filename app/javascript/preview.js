@@ -26,7 +26,21 @@ const preview = function(){
     const deleteBtn = document.createElement("div");
     deleteBtn.setAttribute("class", "img-delete-btn");
     deleteBtn.textContent = "削除";
+    deleteBtn.setAttribute("style", "display: none;"); // ← いったん非表示
     deleteBtn.addEventListener("click", () => deleteImg(dataIndex, imgId));
+
+    const uploadText = document.createElement("div");
+    uploadText.setAttribute("class", "upload-text");
+
+    if(src){
+      previewImg.src = src;
+      deleteBtn.setAttribute("style", "display: block;") // ← 既存画像は最初から表示
+      uploadText.textContent = "クリックして再選択可"; // ← 画像がある場合の説明文
+    }
+    else {
+      uploadText.textContent = "クリックして画像をアップロード"; // ← 画像がない場合の説明文
+    }
+
 
     // 新規フォームの生成
     const newImgForm = document.createElement("input");
@@ -39,6 +53,8 @@ const preview = function(){
     card.appendChild(previewImg);
     card.appendChild(deleteBtn);
     card.appendChild(newImgForm);
+    card.appendChild(uploadText);
+    
 
     // プレビューに追加する
     previewArea.appendChild(card);
@@ -63,10 +79,17 @@ const preview = function(){
     if (inputs.length === 0) {
     buildCard(0);
     }
+
+    const imageCount = document.querySelectorAll(".preview-img[src]").length;
+    const nextIndex = getNextIndex();
+
+    if (imageCount === 4) {
+      buildCard(nextIndex);
+    }
   };
 
 
-    // 投稿ボタンが触れられた時の関数
+  // 投稿ボタンが触れられた時の関数
   const changeFile = (e) => {
     const dataIndex = e.target.getAttribute('data-index');
     const imgFile = e.target.files[0];
@@ -84,16 +107,30 @@ const preview = function(){
 
     previewImg.src = blob;
 
-    // 次の投稿カードの準備
-    const nextIndex = Number(dataIndex) + 1;
-    const nextCard = document.querySelector(`.preview-card[data-index="${nextIndex}"]`);
+    // 削除ボタンの表示
+    const deleteBtn = card.querySelector(".img-delete-btn");
+    previewImg.src = blob;
+    deleteBtn.setAttribute("style", "display: block;");
+    // 説明文の変更
+    const uploadText = card.querySelector(".upload-text");
+    uploadText.textContent = "クリックして再選択可";
 
-    // 次の投稿カードがなければ生成
-    if (!nextCard) {
-    buildCard(nextIndex);
+    // 次の投稿カードの準備
+    const nextIndex = getNextIndex();
+    const nextCard = document.querySelector(`.preview-card[data-index="${nextIndex}"]`);
+    const imageCount = document.querySelectorAll(".preview-img[src]").length;
+
+    // 次の投稿カードがなければ生成、五枚までの制限あり
+    if (!nextCard && imageCount < 5) {
+      buildCard(nextIndex);
     }
   };
-  
+
+  const getNextIndex = () => {
+  const cards = document.querySelectorAll(".preview-card");
+  const indices = Array.from(cards).map(card => Number(card.dataset.index));
+  return indices.length ? Math.max(...indices) + 1 : 0;
+  };
 
    // 編集ページ、すでに画像がある時
   if (existingImages.length > 0){

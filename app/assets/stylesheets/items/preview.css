@@ -1,6 +1,6 @@
 .preview-img{
-  height: 200px;
-  width: 200px;
+  height: 250px;
+  width: 250px;
   object-fit: cover;
 }
 
@@ -14,6 +14,19 @@
   margin-bottom: 15px;
 }
 
+#previews{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap
+}
+
 .preview-card{
+  width: 50%;
+  min-width: 250px;
   margin-top: 20px;
+}
+
+.image-limit{
+  font-weight: 200;
+  font-size: 12px;
 }

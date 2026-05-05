@@ -42,6 +42,8 @@
 
 .weight-bold-text {
   font-weight: bold;
+  height: 20px;
+  width: 30%;
   min-width: 170px;
   margin-bottom: 10px;
 }
@@ -74,7 +76,7 @@
 
 /* 商品画像 */
 .img-upload {
-  display: flex;
+  /* display: flex; */
   /* justify-content: space-between; */
   flex-wrap: wrap;
   padding: 2vh 0;
