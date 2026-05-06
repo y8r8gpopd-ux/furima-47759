@@ -12,6 +12,10 @@ const preview = function(){
 
   //プレビュー生成関数 
   const buildCard = (dataIndex, src = null, imgId = null) => {
+    // cardが５枚に達していたら脱出
+    const imageCount = document.querySelectorAll(".preview-card").length;
+    if(imageCount >= 5) return;
+
     // card形式でプレビュー生成
     const card = document.createElement("div");
     card.setAttribute("class", "preview-card");
@@ -80,6 +84,7 @@ const preview = function(){
     buildCard(0);
     }
 
+    // ５枚選択されていた場合に削除されたら新規の５枚目のカードを作成
     const imageCount = document.querySelectorAll(".preview-img[src]").length;
     const nextIndex = getNextIndex();
 
